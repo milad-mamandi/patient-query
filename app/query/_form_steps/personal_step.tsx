@@ -56,7 +56,7 @@ const PersonalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep }) 
                             control={form.control}
                             name='name'
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className='w-full'>
                                     <FormControl>
                                         <Input placeholder='نام' {...field} />
                                     </FormControl>
@@ -68,7 +68,7 @@ const PersonalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep }) 
                             control={form.control}
                             name='fname'
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className='w-full'>
                                     <FormControl>
                                         <Input placeholder='نام خانوادگی' {...field} />
                                     </FormControl>
