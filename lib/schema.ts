@@ -12,7 +12,7 @@ export const formSchema = z.object({
     fname: z.string({ required_error: 'وارد کردن نام خانوادگی الزامی می‌باشد' }).min(3, {
         message: 'نام خانوادگی حداقل باید 3 کاراکتر باشد',
     }),
-    age: z.string({ required_error: 'وارد کردن سن الزامی می‌باشد' }).min(1, 'وارد کردن وزن الزامی می‌باشد'),
+    age: z.string({ required_error: 'وارد کردن سن الزامی می‌باشد' }).min(1, 'وارد کردن سن الزامی می‌باشد'),
     weight: z.string({ required_error: 'وارد کردن وزن الزامی می‌باشد' }).min(1, 'وارد کردن وزن الزامی می‌باشد'),
     gender: z.enum(['male', 'female'], { required_error: 'وارد کردن جنسیت الزامی می‌باشد' }),
     images: z

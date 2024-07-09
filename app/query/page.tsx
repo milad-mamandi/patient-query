@@ -16,7 +16,7 @@ import Link from 'next/link'
 
 export default function Query() {
     const { toast } = useToast()
-    const [step, setStep] = useState(7)
+    const [step, setStep] = useState(1)
     const [formData, setFormData] = useState<Partial<z.infer<typeof formSchema>>>({
         name: '',
         fname: '',
