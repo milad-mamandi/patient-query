@@ -53,8 +53,24 @@ export default function Query() {
                 <div className='hidden w-1/3 border-l-2 border-gray-300 lg:block'>
                     <div className='flex flex-col'>
                         <div className='flex flex-col gap-2 px-16 py-16'>
-                            <span className='text-3xl'>فرم اول</span>
-                            <span className='text-lg'>اطلاعات شخصی خود را وارد کنید</span>
+                            <span className='text-3xl'>
+                                {step === 1 && 'فرم اول'}
+                                {step === 2 && 'فرم دوم'}
+                                {step === 3 && 'فرم سوم'}
+                                {step === 4 && 'فرم چهارم'}
+                                {step === 5 && 'فرم پنجم'}
+                                {step === 6 && 'فرم شیشم'}
+                                {step === 7 && 'اتمام!'}
+                            </span>
+                            <span className='text-lg'>
+                                {step === 1 && 'اطلاعات شخصی خود را وارد کنید'}
+                                {step === 2 && 'تصاویر زخم خود را بارگذاری کنید'}
+                                {step === 3 && 'اطلاعات تکمیلی مربوط به زخم خود را وارد کنید'}
+                                {step === 4 && 'سوابق پزشکی خود را وارد کنید'}
+                                {step === 5 && 'اطلاعات سبک زندگی خود را وارد کنید'}
+                                {step === 6 && 'شماره موبایل خود را وارد کنید'}
+                                {step === 7 && 'اطلاعات شما ثبت شد'}
+                            </span>
                         </div>
                         <div className='relative flex flex-row items-center justify-between py-5'>
                             <div className='flex flex-row items-center gap-4 px-16'>
