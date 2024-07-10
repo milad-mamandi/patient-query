@@ -48,7 +48,7 @@ export default function Query() {
     }
 
     return (
-        <div className='flex min-h-[100dvh] flex-col overflow-hidden bg-[#f0f8ff] text-black'>
+        <div className='flex min-h-[100dvh] flex-col overflow-hidden bg-white text-black'>
             <div className='flex w-full flex-1 flex-row'>
                 <div className='hidden w-1/3 border-l-2 border-gray-300 lg:block'>
                     <div className='flex flex-col'>
@@ -188,7 +188,7 @@ export default function Query() {
                         </div>
                     </div>
                 </div>
-                <div className='flex w-full items-center justify-center lg:w-2/3'>
+                <div className='flex w-full items-center justify-center px-6 lg:w-2/3'>
                     <div className='flex w-full max-w-[428px] flex-col rounded-md backdrop-blur-lg'>
                         <AnimatePresence mode='wait'>
                             {step === 1 && (

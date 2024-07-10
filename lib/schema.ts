@@ -26,20 +26,16 @@ export const formSchema = z.object({
     scar_cause: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
         message: 'حداقل باید 3 کاراکتر باشد',
     }),
-    scar_duration: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
-        message: 'حداقل باید 3 کاراکتر باشد',
-    }),
+    scar_duration: z.string().optional(),
     ul_disease: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
         message: 'حداقل باید 3 کاراکتر باشد',
-    }),
+    }).optional(),
     disease_background: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
         message: 'حداقل باید 3 کاراکتر باشد',
     }),
-    meds: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
-        message: 'حداقل باید 3 کاراکتر باشد',
-    }),
-    activity: z.enum(['sedentary', 'moderate', 'active'], { required_error: 'وارد کردن میزان تحرک الزامی می‌باشد' }),
-    location: z.enum(['hospital', 'elderly_home', 'home'], { required_error: 'وارد کردن محل زندگی الزامی می‌باشد' }),
+    meds: z.string().optional(),
+    activity: z.enum(['sedentary', 'moderate', 'active']).optional(),
+    location: z.enum(['hospital', 'elderly_home', 'home']).optional(),
     smoke: z.boolean().optional(),
     fatness: z.boolean().optional(),
     alcohol: z.boolean().optional(),
