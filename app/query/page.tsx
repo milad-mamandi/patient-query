@@ -14,10 +14,11 @@ import { formSchema } from '@/lib/schema'
 import ImageStep from './_form_steps/image_step'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import CircularProgress from '@mui/joy/CircularProgress'
 
 export default function Query() {
     const { toast } = useToast()
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(4)
     const [formData, setFormData] = useState<Partial<z.infer<typeof formSchema>>>({
         name: '',
         fname: '',
@@ -28,6 +29,7 @@ export default function Query() {
         scar_cause: '',
         scar_duration: '',
         ul_disease: '',
+        ul_disease_empty: false,
         disease_background: '',
         meds: '',
         activity: undefined,
@@ -48,7 +50,7 @@ export default function Query() {
     }
 
     return (
-        <div className='flex min-h-[100dvh] flex-col overflow-hidden bg-white text-black'>
+        <div className='flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden bg-white text-black'>
             <div className='flex w-full flex-1 flex-row'>
                 <div className='hidden w-1/3 border-l-2 border-gray-300 lg:block'>
                     <div className='flex flex-col'>
@@ -190,6 +192,35 @@ export default function Query() {
                 </div>
                 <div className='flex w-full items-center justify-center px-6 lg:w-2/3'>
                     <div className='flex w-full max-w-[428px] flex-col rounded-md backdrop-blur-lg'>
+                        <div className='flex flex-row justify-between py-6 lg:hidden'>
+                            <div className='flex flex-col items-start justify-center'>
+                                <span className='text-xl'>
+                                    {step == 1 && 'اطلاعات شخصی خود را وارد نمایید'}
+                                    {step == 2 && 'دو عکس از محل زخم آپلود کنید'}
+                                    {step == 3 && 'اطلاعات تکمیلی زخم را وارد نمایید'}
+                                    {step == 4 && 'سوابق پزشکی خود را وارد نمایید'}
+                                    {step == 5 && 'اطلاعات سبک زندگی خود را وارد نمایید'}
+                                    {step == 6 && 'شماره موبایل خود را وارد نمایید'}
+                                    {step == 7 && 'تمام!'}
+                                </span>
+                                <span className='text-gray-400'>
+                                    {step == 1 && 'بعدی: تصاویر زخم'}
+                                    {step == 2 && 'بعدی: اطلاعات تکمیلی زخم'}
+                                    {step == 3 && 'بعدی: سوابق پزشکی'}
+                                    {step == 4 && 'بعدی: سبک زندگی'}
+                                    {step == 5 && 'بعدی: شماره موبایل'}
+                                    {step == 6 && 'بعدی: دریافت کد پیگیری'}
+                                    {step == 7 && 'کد پیگیری به شماره موبایل شما ارسال خواهد شد'}
+                                </span>
+                            </div>
+                            <CircularProgress
+                                determinate
+                                value={(step / 7) * 100}
+                                sx={{ '--CircularProgress-size': '80px' }}
+                            >
+                                7 / {step}
+                            </CircularProgress>
+                        </div>
                         <AnimatePresence mode='wait'>
                             {step === 1 && (
                                 <PersonalStep formData={formData} setFormData={setFormData} nextStep={nextStep} />

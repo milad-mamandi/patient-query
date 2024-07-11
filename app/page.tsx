@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function Home() {
     return (
-        <div className='relative flex min-h-[100dvh] flex-col overflow-hidden bg-white text-black md:min-h-fit'>
+        <div className='relative mb-4 flex min-h-[100dvh] flex-col overflow-hidden bg-white text-black md:min-h-fit'>
             <Image
                 className='md:hidden'
                 src={'/doc.webp'}
@@ -17,7 +17,9 @@ export default function Home() {
             <div className='absolute bottom-0 flex h-full w-full flex-col justify-end gap-2 bg-gradient-to-t from-white via-white via-20% to-transparent to-50% px-8 pb-6 md:hidden'>
                 <span className='text-2xl'>نیاز به مشاوره تخصصی دارید؟</span>
                 <span>در این صورت با پر کردن فرم زیر هر چه سریع تر به بهبودی زخم های خود کمک کنید</span>
-                <Button className='bg-blue-500 text-white'>شروع</Button>
+                <Link href={'/query'}>
+                    <Button className='w-full bg-blue-500 text-white'>شروع</Button>
+                </Link>
                 <Button className='text-white'>تماس با ما</Button>
             </div>
             <div className='mt-8 hidden flex-row gap-4 px-4 md:flex lg:gap-8 lg:px-16'>

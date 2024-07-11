@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { medical_step_schema } from '@/lib/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,6 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface StepProps {
     formData: Partial<z.infer<typeof medical_step_schema>>
@@ -25,6 +26,7 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
         setFormData(prev => ({ ...prev, ...data }))
         nextStep()
     }
+    const isUlEmpty = form.watch('ul_disease_empty', false)
 
     return (
         <Form {...form}>
@@ -45,12 +47,29 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
                                 <FormItem>
                                     <FormLabel>بیماری های زمینه ای</FormLabel>
                                     <FormControl>
-                                        <Input placeholder='مانند دیابت، سرطان، مشکلات قلبی...' {...field} />
+                                        <Input
+                                            placeholder='مانند دیابت، سرطان، مشکلات قلبی...'
+                                            {...field}
+                                            disabled={isUlEmpty}
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+                        {/* <FormField
+                            control={form.control}
+                            name='ul_disease_empty'
+                            render={({ field }) => (
+                                <FormItem className='flex flex-row items-center gap-1'>
+                                    <FormControl>
+                                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                                    </FormControl>
+                                    <FormLabel>ندارم</FormLabel>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        /> */}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <FormField
@@ -73,7 +92,7 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
                             name='meds'
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>سابقه بیماری</FormLabel>
+                                    <FormLabel>دارو های مصرفی</FormLabel>
                                     <FormControl>
                                         <Input placeholder='تمامی داروهایی که مصرف میکنید را بنویسید...' {...field} />
                                     </FormControl>
@@ -82,7 +101,7 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
                             )}
                         />
                     </div>
-                    <div className='flex flex-col sm:flex-row w-full gap-2 mt-4'>
+                    <div className='mt-4 flex w-full flex-col gap-2 sm:flex-row'>
                         <Button className='w-full bg-blue-500 hover:bg-blue-400' type='submit'>
                             ادامه
                         </Button>

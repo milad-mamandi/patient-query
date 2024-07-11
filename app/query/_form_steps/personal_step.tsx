@@ -50,8 +50,7 @@ const PersonalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep }) 
                         duration: 0.2,
                     }}
                 >
-                    <span className='text-3xl '>اطلاعات شخصی خود را پر کنید</span>
-                    <div className='flex flex-col sm:flex-row gap-2 mt-8'>
+                    <div className='flex flex-col gap-2 sm:flex-row'>
                         <FormField
                             control={form.control}
                             name='name'
@@ -77,7 +76,7 @@ const PersonalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep }) 
                             )}
                         />
                     </div>
-                    <div className='flex flex-col sm:flex-row gap-2'>
+                    <div className='flex flex-col gap-2 sm:flex-row'>
                         <FormField
                             control={form.control}
                             name='age'
@@ -127,7 +126,7 @@ const PersonalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep }) 
                             )}
                         />
                     </div>
-                    <div className='flex flex-col sm:flex-row w-full gap-2 mt-4'>
+                    <div className='mt-4 flex w-full flex-col gap-2 sm:flex-row'>
                         <Button className='w-full bg-blue-500 hover:bg-blue-400' type='submit'>
                             ادامه
                         </Button>

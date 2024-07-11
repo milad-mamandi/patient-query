@@ -27,12 +27,9 @@ export const formSchema = z.object({
         message: 'حداقل باید 3 کاراکتر باشد',
     }),
     scar_duration: z.string().optional(),
-    ul_disease: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
-        message: 'حداقل باید 3 کاراکتر باشد',
-    }).optional(),
-    disease_background: z.string({ required_error: 'وارد کردن این فیلد الزامی می‌باشد' }).min(3, {
-        message: 'حداقل باید 3 کاراکتر باشد',
-    }),
+    ul_disease: z.string().optional(),
+    ul_disease_empty: z.boolean().optional(),
+    disease_background: z.string().optional(),
     meds: z.string().optional(),
     activity: z.enum(['sedentary', 'moderate', 'active']).optional(),
     location: z.enum(['hospital', 'elderly_home', 'home']).optional(),
@@ -46,6 +43,6 @@ export const formSchema = z.object({
 export const personal_step_schema = formSchema.pick({ name: true, fname: true, age: true, weight: true, gender: true })
 export const images_step_schema = formSchema.pick({ images: true })
 export const scar_step_schema = formSchema.pick({ scar_cause: true, scar_duration: true })
-export const medical_step_schema = formSchema.pick({ ul_disease: true, disease_background: true, meds: true })
+export const medical_step_schema = formSchema.pick({ ul_disease: true, ul_disease_empty: true, disease_background: true, meds: true })
 export const lifestyle_step_schema = formSchema.pick({ activity: true, location: true, smoke: true, fatness: true, alcohol: true, diaper: true })
 export const pn_step_schema = formSchema.pick({ phone_number: true })

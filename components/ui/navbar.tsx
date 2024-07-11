@@ -6,7 +6,7 @@ import { ArrowLeft, ChevronLeft } from 'lucide-react'
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 export default function Navbar() {
     return (
-        <nav className='hidden h-24 flex-row-reverse items-center justify-between px-4 md:flex lg:px-16'>
+        <nav className='hidden h-24 flex-row-reverse items-center justify-between border-b-2 border-gray-300 px-4 md:flex lg:px-16'>
             <Link href={'/'}>
                 <span className={cn('text-3xl', poppins.className)}>
                     Wound<span className='text-blue-500'>Care</span>

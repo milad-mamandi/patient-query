@@ -29,7 +29,7 @@ const ImageDrag: React.FC<props> = ({ value, onChange }) => {
         }
     }
     return (
-        <div className='w-full max-w-4xl mx-auto py-4'>
+        <div className='mx-auto w-full max-w-4xl py-2'>
             <input
                 type='file'
                 accept='image/*'
@@ -42,27 +42,27 @@ const ImageDrag: React.FC<props> = ({ value, onChange }) => {
                 onDragOver={event => event.preventDefault()}
                 onDrop={handleDrop}
                 onClick={handleClick}
-                className='flex flex-col items-center justify-center border-2 border-dashed border-muted-foreground rounded-lg p-4  cursor-pointer transition-colors hover:border-primary'
+                className='flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground p-4 transition-colors hover:border-primary'
             >
-                <UploadIcon className='w-12 h-12 mb-4 text-muted-foreground' />
-                <h3 className='text-lg font-medium mb-2'>عکس ها را اینجا رها کنید</h3>
+                <UploadIcon className='mb-4 h-12 w-12 text-muted-foreground' />
+                <h3 className='mb-2 text-lg font-medium'>عکس ها را اینجا رها کنید</h3>
                 <p className='text-muted-foreground'>یا اینجا کلیک کنید</p>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4'>
+            <div className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
                 {images.map((image, index) => (
-                    <div key={index} className='relative rounded-lg overflow-hidden group'>
+                    <div key={index} className='group relative overflow-hidden rounded-lg'>
                         <img
                             src={URL.createObjectURL(image)}
                             alt={`Image ${index}`}
                             width={400}
                             height={400}
-                            className='w-full h-full object-cover'
+                            className='h-full w-full object-cover'
                         />
                         <button
                             onClick={() => handleRemove(index)}
-                            className='absolute top-2 right-2 bg-background/80 text-muted-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity'
+                            className='absolute right-2 top-2 rounded-full bg-background/80 p-2 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100'
                         >
-                            <XIcon className='w-4 h-4' />
+                            <XIcon className='h-4 w-4' />
                         </button>
                     </div>
                 ))}

@@ -4,7 +4,6 @@ import { images_step_schema } from '@/lib/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import ImageDrag from '@/components/ui/imagedd'
@@ -39,8 +38,7 @@ const ImageStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, prevS
                     transition={{ duration: 0.2 }}
                     className='flex flex-col gap-2'
                 >
-                    <div className='flex flex-col gap-1'>
-                        <span className='text-2xl'>لطفا حداقل دو عکس از محل زخم آپلود کنید</span>
+                    <div className='mt-4 flex flex-col gap-1'>
                         <span className='mt-2 text-slate-500'>
                             عکس ها در زوایای مناسب و با وضوح و نور کاری گرفته شوند
                         </span>
@@ -60,7 +58,7 @@ const ImageStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, prevS
                             </FormItem>
                         )}
                     />
-                    <div className='flex flex-row gap-2 w-full mt-4'>
+                    <div className='mt-4 flex w-full flex-row gap-2'>
                         <Button className='w-full bg-blue-500 hover:bg-blue-400' type='submit'>
                             ادامه
                         </Button>
