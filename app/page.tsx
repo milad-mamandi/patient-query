@@ -33,7 +33,9 @@ export default function Home() {
                         بگیرند. <br /> تمامی اطلاعات ارسالی شما محفوظ خواهد ماند.
                     </span>
                     <div className='flex w-full flex-row gap-4'>
-                        <Button className='w-full max-w-36 bg-blue-500 text-white hover:bg-blue-400'>شروع</Button>
+                        <Link href={'/query'} className='w-full max-w-36'>
+                            <Button className='w-full max-w-36 bg-blue-500 text-white hover:bg-blue-400'>شروع</Button>
+                        </Link>
                         <Button className='w-full max-w-36 text-white'>تماس با ما</Button>
                     </div>
                     <div className='flex flex-row items-center justify-start divide-x-2 divide-x-reverse divide-gray-200'>

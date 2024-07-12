@@ -3,9 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { medical_step_schema } from '@/lib/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 
@@ -16,6 +16,29 @@ interface StepProps {
     prevStep: () => void
 }
 
+const items = [
+    {
+        id: 'diabetes',
+        label: 'دیابت',
+    },
+    {
+        id: 'cancer',
+        label: 'سرطان',
+    },
+    {
+        id: 'tuberculosis',
+        label: 'سل',
+    },
+    {
+        id: 'syphilis',
+        label: 'سفلیس',
+    },
+    {
+        id: 'other',
+        label: 'موارد دیگر',
+    },
+] as const
+
 const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, prevStep }) => {
     const form = useForm<z.infer<typeof medical_step_schema>>({
         resolver: zodResolver(medical_step_schema),
@@ -23,10 +46,12 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
     })
 
     const onSubmit: SubmitHandler<z.infer<typeof medical_step_schema>> = data => {
+        console.log(data)
         setFormData(prev => ({ ...prev, ...data }))
         nextStep()
     }
-    const isUlEmpty = form.watch('ul_disease_empty', false)
+
+    const other_lying_disease = form.watch('ul_disease')
 
     return (
         <Form {...form}>
@@ -43,33 +68,103 @@ const MedicalStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, pre
                         <FormField
                             control={form.control}
                             name='ul_disease'
-                            render={({ field }) => (
+                            render={() => (
                                 <FormItem>
-                                    <FormLabel>بیماری های زمینه ای</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder='مانند دیابت، سرطان، مشکلات قلبی...'
-                                            {...field}
-                                            disabled={isUlEmpty}
-                                        />
-                                    </FormControl>
+                                    <div className='mb-4'>
+                                        <FormLabel className='text-base'>بیماری های زمینه ای</FormLabel>
+                                        <FormDescription>
+                                            اگر بیماری زمینه ای دارید، از بین گزینه های زیر انخاب کنید
+                                        </FormDescription>
+                                    </div>
+                                    <div className='grid grid-cols-2 gap-2'>
+                                        {items.map(item => (
+                                            <FormField
+                                                key={item.id}
+                                                control={form.control}
+                                                name='ul_disease'
+                                                render={({ field }) => {
+                                                    return (
+                                                        <FormItem
+                                                            key={item.id}
+                                                            className='flex flex-row items-start gap-2 space-x-2 space-y-0'
+                                                        >
+                                                            <FormControl>
+                                                                <Checkbox
+                                                                    checked={field.value?.includes(item.id)}
+                                                                    onCheckedChange={checked => {
+                                                                        return checked
+                                                                            ? field.onChange([...field.value, item.id])
+                                                                            : field.onChange(
+                                                                                  field.value?.filter(
+                                                                                      value => value !== item.id,
+                                                                                  ),
+                                                                              )
+                                                                    }}
+                                                                />
+                                                            </FormControl>
+                                                            <FormLabel className='font-normal'>{item.label}</FormLabel>
+                                                        </FormItem>
+                                                    )
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                    <AnimatePresence>
+                                        {other_lying_disease.includes('other') && (
+                                            <motion.div
+                                                initial={{
+                                                    height: 0,
+                                                    opacity: 0,
+                                                }}
+                                                animate={{
+                                                    height: 'auto',
+                                                    opacity: 1,
+                                                    transition: {
+                                                        height: {
+                                                            duration: 0.4,
+                                                        },
+                                                        opacity: {
+                                                            duration: 0.25,
+                                                            delay: 0.15,
+                                                        },
+                                                    },
+                                                }}
+                                                exit={{
+                                                    height: 0,
+                                                    opacity: 0,
+                                                    transition: {
+                                                        height: {
+                                                            duration: 0.4,
+                                                        },
+                                                        opacity: {
+                                                            duration: 0.25,
+                                                        },
+                                                    },
+                                                }}
+                                            >
+                                                <FormField
+                                                    control={form.control}
+                                                    name='ul_disease_other'
+                                                    render={({ field }) => {
+                                                        return (
+                                                            <FormItem>
+                                                                <FormControl>
+                                                                    <Input
+                                                                        placeholder='لطفا نام بیماری را بنویسید'
+                                                                        {...field}
+                                                                    />
+                                                                </FormControl>
+                                                            </FormItem>
+                                                        )
+                                                    }}
+                                                />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-                            control={form.control}
-                            name='ul_disease_empty'
-                            render={({ field }) => (
-                                <FormItem className='flex flex-row items-center gap-1'>
-                                    <FormControl>
-                                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                                    </FormControl>
-                                    <FormLabel>ندارم</FormLabel>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        /> */}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <FormField

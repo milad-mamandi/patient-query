@@ -18,7 +18,7 @@ import CircularProgress from '@mui/joy/CircularProgress'
 
 export default function Query() {
     const { toast } = useToast()
-    const [step, setStep] = useState(4)
+    const [step, setStep] = useState(1)
     const [formData, setFormData] = useState<Partial<z.infer<typeof formSchema>>>({
         name: '',
         fname: '',
@@ -28,8 +28,8 @@ export default function Query() {
         images: [],
         scar_cause: '',
         scar_duration: '',
-        ul_disease: '',
-        ul_disease_empty: false,
+        ul_disease: [],
+        ul_disease_other: '',
         disease_background: '',
         meds: '',
         activity: undefined,
@@ -50,7 +50,7 @@ export default function Query() {
     }
 
     return (
-        <div className='flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden bg-white text-black'>
+        <div className='mb-4 flex min-h-[calc(100dvh-6rem)] flex-col overflow-hidden bg-white text-black'>
             <div className='flex w-full flex-1 flex-row'>
                 <div className='hidden w-1/3 border-l-2 border-gray-300 lg:block'>
                     <div className='flex flex-col'>

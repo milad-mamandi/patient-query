@@ -9,6 +9,7 @@ import { DirectionProvider } from '@radix-ui/react-direction'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 interface StepProps {
     formData: Partial<z.infer<typeof lifestyle_step_schema>>
@@ -76,6 +77,42 @@ const LifestyleStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, p
                             control={form.control}
                             name='location'
                             render={({ field }) => (
+                                <FormItem className='space-y-3'>
+                                    <FormLabel>محل نگهداری بیمار</FormLabel>
+                                    <FormControl>
+                                        <RadioGroup
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                            className='flex flex-col items-end space-y-1'
+                                        >
+                                            <FormItem className='flex items-center space-x-3 space-y-0'>
+                                                <FormLabel className='font-normal'>بیمارستان</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroupItem value='hospital' />
+                                                </FormControl>
+                                            </FormItem>
+                                            <FormItem className='flex items-center space-x-3 space-y-0'>
+                                                <FormLabel className='font-normal'>خانه سالمندان</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroupItem value='elderly_home' />
+                                                </FormControl>
+                                            </FormItem>
+                                            <FormItem className='flex items-center space-x-3 space-y-0'>
+                                                <FormLabel className='font-normal'>خانه</FormLabel>
+                                                <FormControl>
+                                                    <RadioGroupItem value='home' />
+                                                </FormControl>
+                                            </FormItem>
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        {/* <FormField
+                            control={form.control}
+                            name='location'
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>محل نگه‌داری بیمار</FormLabel>
                                     <DirectionProvider dir='rtl'>
@@ -95,11 +132,11 @@ const LifestyleStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, p
                                     <FormMessage />
                                 </FormItem>
                             )}
-                        />
+                        /> */}
                     </div>
                     <div>
                         <span className='text-xl'>وضعیت بهداشتی و زندگی</span>
-                        <div className='flex flex-col sm:flex-row gap-4 sm:gap-8 mt-4'>
+                        <div className='mt-4 flex flex-col gap-4 sm:flex-row sm:gap-8'>
                             <div className='flex flex-col gap-4'>
                                 <FormField
                                     control={form.control}
@@ -156,7 +193,7 @@ const LifestyleStep: React.FC<StepProps> = ({ formData, setFormData, nextStep, p
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col sm:flex-row w-full gap-2'>
+                    <div className='flex w-full flex-col gap-2 sm:flex-row'>
                         <Button className='w-full bg-blue-500 hover:bg-blue-400' type='submit'>
                             ادامه
                         </Button>
